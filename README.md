@@ -14,13 +14,13 @@
     (Commits the tracked changes and prepares them to be pushed to a remote repository. To remove this commit and modify the file, use 'git reset --soft HEAD~1' and      commit and add the file again.)     
  6. Add remote repo url
     $ git remote add origin  https://github.com/girishgowd7290/SpringSecurity.git
-    # Sets the new remote
+            - Sets the new remote
     $ git remote -v
-    # Verifies the new remote URL  
+            - Verifies the new remote URL  
 7. Push the changes in your local repository to GitHub.
     $ git branch -M main 
     $ git push -u origin main
-    # Pushes the changes in your local repository up to the remote repository you specified as the origin 
+            - Pushes the changes in your local repository up to the remote repository you specified as the origin 
 
 
 References : https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line

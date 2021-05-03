@@ -1,0 +1,20 @@
+package com.ggbs.springsecurity.model;
+
+public class AuthorisationResponse {
+
+	private String jwt;
+	
+	public AuthorisationResponse() {
+		super();
+	}
+
+	public AuthorisationResponse(String jwt) {
+		super();
+		this.jwt = jwt;
+	}
+
+	public String getJwt() {
+		return jwt;
+	}
+	
+}

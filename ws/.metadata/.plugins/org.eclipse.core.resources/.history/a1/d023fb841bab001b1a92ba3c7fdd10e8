@@ -1,0 +1,30 @@
+package com.ggbs.springsecurity.model;
+
+public class AuthorisationRequest {
+
+	private String passwod;
+	private String username;
+	
+	public AuthorisationRequest(String passwod, String username) {
+		this.passwod = passwod;
+		this.username = username;
+	}
+	
+	public AuthorisationRequest() {
+	}
+	
+	public String getPasswod() {
+		return passwod;
+	}
+	public void setPasswod(String passwod) {
+		this.passwod = passwod;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	
+}

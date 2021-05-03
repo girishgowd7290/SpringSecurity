@@ -1,0 +1,16 @@
+package com.ggbs.springsecurity.contollers;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class SecurityController {
+
+	@GetMapping("/security")
+	public String securityWithJWT() {
+		return "Hello Girish, we are trying Spring Security with JWT";
+	}
+	
+	
+}
+

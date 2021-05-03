@@ -1,0 +1,61 @@
+package com.ggbs.springsecurity.contollers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ggbs.springsecurity.model.AuthorisationRequest;
+import com.ggbs.springsecurity.model.AuthorisationResponse;
+import com.ggbs.springsecurity.service.MyUserDetailsService;
+import com.ggbs.springsecurity.utils.JwtUtil;
+
+@RestController
+public class SecurityController {
+
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private JwtUtil jwtTokenUtil;
+	
+	@Autowired
+	private MyUserDetailsService userDetailsService;
+
+	@GetMapping("/security")
+	public String securityWithJWT() {
+		return "Hello Girish, we are trying Spring Security with JWT";
+	}
+
+	@GetMapping("/authenticate")
+	public ResponseEntity<AuthorisationResponse> authenticate(@RequestBody AuthorisationRequest authorisationRequest) throws Exception {
+
+		try {
+			// 1. Authenticate the provided credentials in input request
+			authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(
+							authorisationRequest.getUsername(),
+							authorisationRequest.getPasswod())
+					);
+		}
+		// throw exception if the credentials doesn match
+		catch (BadCredentialsException e) {
+			throw new Exception("Incorrect username or password", e);
+		}
+		
+		// 2. Fetch UserDetails object from UserDetailsService by passing Username
+		UserDetails userDetails = userDetailsService.loadUserByUsername(authorisationRequest.getUsername());
+		
+		// 3. Call JwtUtil to genertate the JWT Token 
+		final String jwtToken = jwtTokenUtil.generateToken(userDetails);
+
+		// 4. Return JWT token in response
+		return ResponseEntity.ok().body(new AuthorisationResponse(jwtToken));
+	}
+}
+

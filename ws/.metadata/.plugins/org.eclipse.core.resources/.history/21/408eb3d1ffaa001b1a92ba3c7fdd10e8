@@ -1,0 +1,5 @@
+package com.ggbs.springsecurity.utils;
+
+public class JwtUtil {
+
+}

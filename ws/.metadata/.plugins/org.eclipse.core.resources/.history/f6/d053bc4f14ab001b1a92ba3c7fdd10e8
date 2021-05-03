@@ -1,0 +1,5 @@
+package com.ggbs.springsecurity.filters;
+
+public class JwtRequestFilter {
+
+}
